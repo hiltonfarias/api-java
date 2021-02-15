@@ -4,14 +4,16 @@ public class Users {
     private String name;
     private String email;
     private String cpf;
+    private String birthDate;
 
     public Users() {
     }
 
-    public Users(String name, String email, String cpf) {
+    public Users(String name, String email, String cpf, String birthDate) {
         this.name = name;
         this.email = email;
         this.cpf = cpf;
+        this.birthDate = birthDate;
     }
 
     public String getName() {
@@ -36,5 +38,13 @@ public class Users {
 
     public void setCpf(String cpf) {
         this.cpf = cpf;
+    }
+
+    public String getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(String birthDate) {
+        this.birthDate = birthDate;
     }
 }
