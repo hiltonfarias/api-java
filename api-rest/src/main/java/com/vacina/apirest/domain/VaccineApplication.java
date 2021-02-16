@@ -1,15 +1,17 @@
 package com.vacina.apirest.domain;
 
+import java.time.LocalDate;
+
 public class VaccineApplication {
 
     private String name;
     private String email;
-    private String vaccineDate;
+    private LocalDate vaccineDate;
 
     public VaccineApplication() {
     }
 
-    public VaccineApplication(String name, String email, String vaccineDate) {
+    public VaccineApplication(String name, String email, LocalDate vaccineDate) {
         this.name = name;
         this.email = email;
         this.vaccineDate = vaccineDate;
@@ -31,11 +33,11 @@ public class VaccineApplication {
         this.email = email;
     }
 
-    public String getVaccineDate() {
+    public LocalDate getVaccineDate() {
         return vaccineDate;
     }
 
-    public void setVaccineDate(String vaccineDate) {
+    public void setVaccineDate(LocalDate vaccineDate) {
         this.vaccineDate = vaccineDate;
     }
 }
