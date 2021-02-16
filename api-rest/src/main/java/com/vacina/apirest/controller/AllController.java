@@ -25,27 +25,51 @@ public class AllController {
     }
 
     @GetMapping(path = "/{id}")
-    public ResponseEntity<Users> findUserById(@PathVariable long id) {
+    public ResponseEntity<Users> findUserById(@PathVariable Long id) {
         return ResponseEntity.ok(userService.findById(id));
     }
 
-    @GetMapping(path = "application")
+    @GetMapping(path = "/application")
     public ResponseEntity<List<VaccineApplication>> listVaccines() {
         return ResponseEntity.ok(userService.listAllApplication());
     }
 
-    @GetMapping(path = "application/{email}")
+    @GetMapping(path = "/application/{email}")
     public ResponseEntity<VaccineApplication> findVaccineByEmail(@PathVariable String email) {
         return ResponseEntity.ok(userService.findByEmail(email));
     }
 
     @PostMapping
-    public ResponseEntity<Users> saveUser(@RequestBody Users users){
+    public ResponseEntity<Users> saveUser(@RequestBody Users users) {
         return new ResponseEntity<>(userService.save(users), HttpStatus.CREATED);
     }
 
-    @PostMapping(path = "application")
-    public ResponseEntity<VaccineApplication> saveApplication(@RequestBody VaccineApplication vaccineApplication){
+    @PostMapping(path = "/application")
+    public ResponseEntity<VaccineApplication> saveApplication(@RequestBody VaccineApplication vaccineApplication) {
         return new ResponseEntity<>(userService.save(vaccineApplication), HttpStatus.CREATED);
+    }
+
+    @DeleteMapping(path = "/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        userService.delete(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @DeleteMapping(path = "/application/{email}")
+    public ResponseEntity<Void> deleteApplication(@PathVariable String email) {
+        userService.deleteApplication(email);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @PutMapping
+    public ResponseEntity<Void> replaceUser(@RequestBody Users users) {
+        userService.replace(users);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @PutMapping(path = "/application")
+    public ResponseEntity<Void> replaceApplication(@RequestBody VaccineApplication vaccineApplication) {
+        userService.replaceVaccine(vaccineApplication);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

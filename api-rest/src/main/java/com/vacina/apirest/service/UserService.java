@@ -38,11 +38,13 @@ public class UserService {
 
         vaccineApplicationList = new ArrayList<>(List.of(
                 new VaccineApplication(
+                        1L,
                         "CoronaVac",
                         "hilton@email.com",
                         LocalDate.now()
                 ),
                 new VaccineApplication(
+                        2L,
                         "CoronaVac",
                         "adriana@email.com",
                         LocalDate.now()
@@ -54,7 +56,7 @@ public class UserService {
         return usersList;
     }
 
-    public Users findById(long id) {
+    public Users findById(Long id) {
         return usersList
                 .stream()
                 .filter(user -> user.getId().equals(id))
@@ -81,9 +83,28 @@ public class UserService {
     }
 
     public VaccineApplication save(VaccineApplication vaccineApplication) {
+        vaccineApplication.setId(ThreadLocalRandom.current().nextLong(3, 100000));
         vaccineApplication.setEmail("miguel@email.com");
         vaccineApplication.setVaccineDate(LocalDate.now());
         vaccineApplicationList.add(vaccineApplication);
         return vaccineApplication;
+    }
+
+    public void delete(Long id) {
+        usersList.remove(findById(id));
+    }
+
+    public void deleteApplication(String email) {
+        vaccineApplicationList.remove(findByEmail(email));
+    }
+
+    public void replace(Users users) {
+        delete(users.getId());
+        usersList.add(users);
+    }
+
+    public void replaceVaccine(VaccineApplication vaccineApplication) {
+        deleteApplication(vaccineApplication.getEmail());
+        vaccineApplicationList.add(vaccineApplication);
     }
 }
