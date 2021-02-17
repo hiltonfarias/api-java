@@ -1,11 +1,11 @@
 package com.vacina.apirest.repository;
 
-import com.vacina.apirest.domain.Users;
-import com.vacina.apirest.domain.VaccineApplication;
+import com.vacina.apirest.domain.Patient;
+import com.vacina.apirest.domain.Vaccine;
 
 import java.util.List;
 
 public interface UsersRepository {
-    List<Users> listAll();
-    List<VaccineApplication> listAllApplication();
+    List<Patient> listAll();
+    List<Vaccine> listAllApplication();
 }

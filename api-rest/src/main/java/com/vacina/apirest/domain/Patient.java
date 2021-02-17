@@ -3,7 +3,7 @@ package com.vacina.apirest.domain;
 import java.time.LocalDate;
 import java.util.Objects;
 
-public class Users {
+public class Patient {
 
     private Long id;
     private String name;
@@ -11,10 +11,10 @@ public class Users {
     private String cpf;
     private LocalDate birthDate;
 
-    public Users() {
+    public Patient() {
     }
 
-    public Users(Long id, String name, String email, String cpf, LocalDate birthDate) {
+    public Patient(Long id, String name, String email, String cpf, LocalDate birthDate) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -66,12 +66,12 @@ public class Users {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Users users = (Users) o;
-        return Objects.equals(id, users.id) &&
-                Objects.equals(name, users.name) &&
-                Objects.equals(email, users.email) &&
-                Objects.equals(cpf, users.cpf) &&
-                Objects.equals(birthDate, users.birthDate);
+        Patient patient = (Patient) o;
+        return Objects.equals(id, patient.id) &&
+                Objects.equals(name, patient.name) &&
+                Objects.equals(email, patient.email) &&
+                Objects.equals(cpf, patient.cpf) &&
+                Objects.equals(birthDate, patient.birthDate);
     }
 
     @Override
@@ -81,7 +81,7 @@ public class Users {
 
     @Override
     public String toString() {
-        return "Users{" +
+        return "Patient{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
