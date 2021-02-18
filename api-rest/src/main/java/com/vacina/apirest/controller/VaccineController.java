@@ -1,6 +1,8 @@
 package com.vacina.apirest.controller;
 
 import com.vacina.apirest.domain.Vaccine;
+import com.vacina.apirest.requests.requestsvaccine.VaccinePostRequestBody;
+import com.vacina.apirest.requests.requestsvaccine.VaccinePutRequestBody;
 import com.vacina.apirest.service.VaccineService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,12 +27,12 @@ public class VaccineController {
 
     @GetMapping(path = "/{id}")
     public ResponseEntity<Vaccine> findVaccineById(@PathVariable Long id) {
-        return new ResponseEntity<>(VaccineService.findById(id), HttpStatus.OK);
+        return new ResponseEntity<>(vaccineService.findByIdOrThrowBadRequestException(id), HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity<Vaccine> save(@RequestBody Vaccine vaccine) {
-        return new ResponseEntity<>(vaccineService.save(vaccine), HttpStatus.CREATED);
+    public ResponseEntity<Vaccine> save(@RequestBody VaccinePostRequestBody vaccinePostRequestBody) {
+        return new ResponseEntity<>(vaccineService.save(vaccinePostRequestBody), HttpStatus.CREATED);
     }
 
     @DeleteMapping(path = "/{id}")
@@ -40,8 +42,8 @@ public class VaccineController {
     }
 
     @PutMapping
-    public ResponseEntity<Void> replace(@RequestBody Vaccine vaccine) {
-        vaccineService.replace(vaccine);
+    public ResponseEntity<Void> replace(@RequestBody VaccinePutRequestBody vaccinePutRequestBody) {
+        vaccineService.replace(vaccinePutRequestBody);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

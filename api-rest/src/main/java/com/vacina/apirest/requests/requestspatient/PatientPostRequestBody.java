@@ -1,44 +1,26 @@
-package com.vacina.apirest.domain;
+package com.vacina.apirest.requests.requestspatient;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import java.time.LocalDate;
 import java.util.Objects;
 
-@Entity
-public class Patient {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class PatientPostRequestBody {
     private String name;
     private String email;
     private String cpf;
     private LocalDate birthDate;
 
-    public static Patient.PatientBuilder builder() {
-        return new Patient.PatientBuilder();
+    public static PatientPostRequestBody.PatientPostRequestBodyBuilder builder() {
+        return new PatientPostRequestBody.PatientPostRequestBodyBuilder();
     }
 
-    public Patient(Long id, String name, String email, String cpf, LocalDate birthDate) {
-        this.id = id;
+    public PatientPostRequestBody(String name, String email, String cpf, LocalDate birthDate) {
         this.name = name;
         this.email = email;
         this.cpf = cpf;
         this.birthDate = birthDate;
     }
 
-    public Patient() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+    public PatientPostRequestBody() {
     }
 
     public String getName() {
@@ -77,74 +59,65 @@ public class Patient {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Patient patient = (Patient) o;
-        return Objects.equals(id, patient.id) &&
-                Objects.equals(name, patient.name) &&
-                Objects.equals(email, patient.email) &&
-                Objects.equals(cpf, patient.cpf) &&
-                Objects.equals(birthDate, patient.birthDate);
+        PatientPostRequestBody that = (PatientPostRequestBody) o;
+        return name.equals(that.name) &&
+                email.equals(that.email) &&
+                cpf.equals(that.cpf) &&
+                birthDate.equals(that.birthDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, email, cpf, birthDate);
+        return Objects.hash(name, email, cpf, birthDate);
     }
 
     @Override
     public String toString() {
-        return "Patient{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
+        return "PatientPostRequestBody{" +
+                "name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", cpf='" + cpf + '\'' +
                 ", birthDate=" + birthDate +
                 '}';
     }
 
-    public static class PatientBuilder {
-        private Long id;
+    public static class PatientPostRequestBodyBuilder {
         private String name;
         private String email;
         private String cpf;
         private LocalDate birthDate;
 
-        public PatientBuilder() {
+        public PatientPostRequestBodyBuilder() {
         }
 
-        public Patient.PatientBuilder id(Long id) {
-            this.id = id;
-            return this;
-        }
-
-        public Patient.PatientBuilder name(String name) {
+        public PatientPostRequestBody.PatientPostRequestBodyBuilder name(String name) {
             this.name = name;
             return this;
         }
 
-        public Patient.PatientBuilder email(String email) {
+        public PatientPostRequestBody.PatientPostRequestBodyBuilder email(String email) {
             this.email = email;
             return this;
         }
 
-        public Patient.PatientBuilder cpf(String cpf) {
+        public PatientPostRequestBody.PatientPostRequestBodyBuilder cpf(String cpf) {
             this.cpf = cpf;
             return this;
         }
 
-        public Patient.PatientBuilder birthDate(LocalDate birthDate) {
+        public PatientPostRequestBody.PatientPostRequestBodyBuilder birthDate(LocalDate birthDate) {
             this.birthDate = birthDate;
             return this;
         }
 
-        public Patient build() {
-            return new Patient(this.id, this.name, this.email, this.cpf, this.birthDate);
+        public PatientPostRequestBody build() {
+            return new PatientPostRequestBody(this.name, this.email, this.cpf, this.birthDate);
         }
 
         @Override
         public String toString() {
-            return "PatientBuilder{" +
-                    "id=" + id +
-                    ", name='" + name + '\'' +
+            return "PatientPostRequestBodyBuilder{" +
+                    "name='" + name + '\'' +
                     ", email='" + email + '\'' +
                     ", cpf='" + cpf + '\'' +
                     ", birthDate=" + birthDate +
