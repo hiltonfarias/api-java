@@ -1,36 +1,30 @@
-package com.vacina.apirest.domain;
+package com.vacina.apirest.requests.requestsApplication;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
+import com.vacina.apirest.domain.Patient;
+import com.vacina.apirest.domain.Vaccine;
+
 import java.time.LocalDate;
 import java.util.Objects;
 
-@Entity
-public class Application {
+public class ApplicationPutRequestBody {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @OneToOne(cascade = CascadeType.PERSIST)
     private Patient email;
-    @OneToOne(cascade = CascadeType.PERSIST)
-    @NotEmpty
     private Vaccine name;
-    @NotEmpty
     private LocalDate vaccineDate;
 
-    public static Application.ApplicationBuilder builder() {
-        return new Application.ApplicationBuilder();
+    public static ApplicationPutRequestBody.ApplicationPutRequestBodyBuilder builder() {
+        return new ApplicationPutRequestBody.ApplicationPutRequestBodyBuilder();
     }
 
-    public Application(Long id, Patient email, @NotEmpty Vaccine name, @NotEmpty LocalDate vaccineDate) {
+    public ApplicationPutRequestBody(Long id, Patient email, Vaccine name, LocalDate vaccineDate) {
         this.id = id;
         this.email = email;
         this.name = name;
         this.vaccineDate = vaccineDate;
     }
 
-    public Application() {
+    public ApplicationPutRequestBody() {
     }
 
     public Long getId() {
@@ -69,7 +63,7 @@ public class Application {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Application that = (Application) o;
+        ApplicationPutRequestBody that = (ApplicationPutRequestBody) o;
         return id.equals(that.id) && email.equals(that.email) && name.equals(that.name) && vaccineDate.equals(that.vaccineDate);
     }
 
@@ -78,53 +72,42 @@ public class Application {
         return Objects.hash(id, email, name, vaccineDate);
     }
 
-    @Override
-    public String toString() {
-        return "Application{" +
-                "id=" + id +
-                ", email=" + email +
-                ", name=" + name +
-                ", vaccineDate=" + vaccineDate +
-                '}';
-    }
-
-    public static class ApplicationBuilder {
-
+    public static class ApplicationPutRequestBodyBuilder {
         private Long id;
         private Patient email;
         private Vaccine name;
         private LocalDate vaccineDate;
 
-        public ApplicationBuilder() {
+        public ApplicationPutRequestBodyBuilder() {
         }
 
-        public Application.ApplicationBuilder id(Long id) {
+        public ApplicationPutRequestBody.ApplicationPutRequestBodyBuilder id(Long id) {
             this.id = id;
             return this;
         }
 
-        public Application.ApplicationBuilder email(Patient email) {
+        public ApplicationPutRequestBody.ApplicationPutRequestBodyBuilder email(Patient email) {
             this.email = email;
             return this;
         }
 
-        public Application.ApplicationBuilder name(Vaccine name) {
+        public ApplicationPutRequestBody.ApplicationPutRequestBodyBuilder name(Vaccine name) {
             this.name = name;
             return this;
         }
 
-        public Application.ApplicationBuilder vaccineDate(LocalDate vaccineDate) {
+        public ApplicationPutRequestBody.ApplicationPutRequestBodyBuilder vaccineDate(LocalDate vaccineDate) {
             this.vaccineDate = vaccineDate;
             return this;
         }
 
-        public Application build(){
-            return new Application(this.id, this.email, this.name, this.vaccineDate);
+        public ApplicationPutRequestBody build() {
+            return new ApplicationPutRequestBody(this.id, this.email, this.name, this.vaccineDate);
         }
 
         @Override
         public String toString() {
-            return "ApplicationBuilder{" +
+            return "ApplicationPutRequestBodyBuilder{" +
                     "id=" + id +
                     ", email=" + email +
                     ", name=" + name +

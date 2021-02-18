@@ -1,9 +1,10 @@
 package com.vacina.apirest.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import org.hibernate.annotations.NaturalId;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -13,8 +14,17 @@ public class Patient {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotEmpty
     private String name;
+    @NaturalId
+    @Column(unique = true)
+    @NotEmpty
+    @NotNull
     private String email;
+    @NaturalId
+    @Column(unique = true)
+    @NotEmpty
+    @NotNull
     private String cpf;
     private LocalDate birthDate;
 
@@ -22,7 +32,12 @@ public class Patient {
         return new Patient.PatientBuilder();
     }
 
-    public Patient(Long id, String name, String email, String cpf, LocalDate birthDate) {
+    public Patient(
+            Long id,
+            @NotEmpty String name,
+            @NotEmpty @NotNull String email,
+            @NotEmpty @NotNull String cpf,
+            LocalDate birthDate) {
         this.id = id;
         this.name = name;
         this.email = email;
