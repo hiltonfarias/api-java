@@ -29,6 +29,14 @@ public class Vaccine {
         this.typeOfVaccine = typeOfVaccine;
     }
 
+    public Vaccine(Long id) {
+        this.id = id;
+    }
+
+    public Vaccine(@NotEmpty String name) {
+        this.name = name;
+    }
+
     public Vaccine() {
     }
 

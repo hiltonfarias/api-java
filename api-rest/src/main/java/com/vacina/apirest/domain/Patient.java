@@ -32,16 +32,27 @@ public class Patient {
         return new Patient.PatientBuilder();
     }
 
-    public Patient(
-            Long id,
-            @NotEmpty String name,
-            @NotEmpty @NotNull String email,
-            @NotEmpty @NotNull String cpf,
-            LocalDate birthDate) {
+    public Patient(Long id,
+                   @NotEmpty String name,
+                   @NotEmpty @NotNull String email,
+                   @NotEmpty @NotNull String cpf,
+                   LocalDate birthDate) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.cpf = cpf;
+        this.birthDate = birthDate;
+    }
+
+    public Patient(Long id) {
+        this.id = id;
+    }
+
+    public Patient(@NotEmpty String name) {
+        this.name = name;
+    }
+
+    public Patient(LocalDate birthDate) {
         this.birthDate = birthDate;
     }
 

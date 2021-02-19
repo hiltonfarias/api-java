@@ -1,7 +1,6 @@
 package com.vacina.apirest.domain;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -11,23 +10,37 @@ public class Application {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @OneToOne(cascade = CascadeType.PERSIST)
-    private Patient email;
-    @OneToOne(cascade = CascadeType.PERSIST)
-    @NotEmpty
-    private Vaccine name;
-    @NotEmpty
+    @ManyToOne //(cascade = CascadeType.PERSIST)
+    private Patient patient;
+    @ManyToOne //(cascade = CascadeType.PERSIST)
+    private Vaccine vaccine;
     private LocalDate vaccineDate;
 
     public static Application.ApplicationBuilder builder() {
         return new Application.ApplicationBuilder();
     }
 
-    public Application(Long id, Patient email, @NotEmpty Vaccine name, @NotEmpty LocalDate vaccineDate) {
+    public Application(Long id, Patient patient, Vaccine vaccine, LocalDate vaccineDate) {
         this.id = id;
-        this.email = email;
-        this.name = name;
+        this.patient = patient;
+        this.vaccine = vaccine;
         this.vaccineDate = vaccineDate;
+    }
+
+    public Application( Patient patient) {
+        this.patient = patient;
+    }
+
+    public Application( Vaccine vaccine) {
+        this.vaccine = vaccine;
+    }
+
+    public Application( LocalDate vaccineDate) {
+        this.vaccineDate = vaccineDate;
+    }
+
+    public Application(Long id) {
+        this.id = id;
     }
 
     public Application() {
@@ -41,20 +54,20 @@ public class Application {
         this.id = id;
     }
 
-    public Patient getEmail() {
-        return email;
+    public Patient getPatient() {
+        return patient;
     }
 
-    public void setEmail(Patient email) {
-        this.email = email;
+    public void setPatient(Patient patient) {
+        this.patient = patient;
     }
 
-    public Vaccine getName() {
-        return name;
+    public Vaccine getVaccine() {
+        return vaccine;
     }
 
-    public void setName(Vaccine name) {
-        this.name = name;
+    public void setVaccine(Vaccine vaccine) {
+        this.vaccine = vaccine;
     }
 
     public LocalDate getVaccineDate() {
@@ -70,20 +83,23 @@ public class Application {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Application that = (Application) o;
-        return id.equals(that.id) && email.equals(that.email) && name.equals(that.name) && vaccineDate.equals(that.vaccineDate);
+        return id.equals(that.id) &&
+                patient.equals(that.patient) &&
+                vaccine.equals(that.vaccine) &&
+                vaccineDate.equals(that.vaccineDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, email, name, vaccineDate);
+        return Objects.hash(id, patient, vaccine, vaccineDate);
     }
 
     @Override
     public String toString() {
         return "Application{" +
                 "id=" + id +
-                ", email=" + email +
-                ", name=" + name +
+                ", email=" + patient +
+                ", name=" + vaccine +
                 ", vaccineDate=" + vaccineDate +
                 '}';
     }
@@ -91,8 +107,8 @@ public class Application {
     public static class ApplicationBuilder {
 
         private Long id;
-        private Patient email;
-        private Vaccine name;
+        private Patient patient;
+        private Vaccine vaccine;
         private LocalDate vaccineDate;
 
         public ApplicationBuilder() {
@@ -103,13 +119,13 @@ public class Application {
             return this;
         }
 
-        public Application.ApplicationBuilder email(Patient email) {
-            this.email = email;
+        public Application.ApplicationBuilder patiente(Patient patient) {
+            this.patient = patient;
             return this;
         }
 
-        public Application.ApplicationBuilder name(Vaccine name) {
-            this.name = name;
+        public Application.ApplicationBuilder vaccine(Vaccine vaccine) {
+            this.vaccine = vaccine;
             return this;
         }
 
@@ -119,15 +135,15 @@ public class Application {
         }
 
         public Application build(){
-            return new Application(this.id, this.email, this.name, this.vaccineDate);
+            return new Application(this.id, this.patient, this.vaccine, this.vaccineDate);
         }
 
         @Override
         public String toString() {
             return "ApplicationBuilder{" +
                     "id=" + id +
-                    ", email=" + email +
-                    ", name=" + name +
+                    ", email=" + patient +
+                    ", name=" + vaccine +
                     ", vaccineDate=" + vaccineDate +
                     '}';
         }

@@ -18,6 +18,10 @@ public class VaccinePostRequestBody {
         this.typeOfVaccine = typeOfVaccine;
     }
 
+    public VaccinePostRequestBody(String name) {
+        this.name = name;
+    }
+
     public VaccinePostRequestBody() {
     }
 

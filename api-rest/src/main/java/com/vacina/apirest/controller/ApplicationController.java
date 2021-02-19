@@ -1,8 +1,7 @@
 package com.vacina.apirest.controller;
 
 import com.vacina.apirest.domain.Application;
-import com.vacina.apirest.requests.requestsApplication.ApplicationPostRequestBody;
-import com.vacina.apirest.requests.requestsApplication.ApplicationPutRequestBody;
+import com.vacina.apirest.requests.requestsApplication.ApplicationRequestBody;
 import com.vacina.apirest.service.ApplicationService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,8 +30,8 @@ public class ApplicationController {
     }
 
     @PostMapping
-    public ResponseEntity<Application> save(@RequestBody ApplicationPostRequestBody applicationPostRequestBody) {
-        return new ResponseEntity<>(applicationService.save(applicationPostRequestBody), HttpStatus.CREATED);
+    public ResponseEntity<Application> save(@RequestBody ApplicationRequestBody applicationRequestBody) {
+        return new ResponseEntity<>(applicationService.save(applicationRequestBody), HttpStatus.CREATED);
     }
 
     @DeleteMapping(path = "/{id}")
@@ -42,8 +41,8 @@ public class ApplicationController {
     }
 
     @PutMapping
-    public ResponseEntity<Void> replace(@RequestBody ApplicationPutRequestBody applicationPutRequestBody) {
-        applicationService.replace(applicationPutRequestBody);
+    public ResponseEntity<Void> replace(@RequestBody ApplicationRequestBody applicationRequestBody) {
+        applicationService.replace(applicationRequestBody);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
